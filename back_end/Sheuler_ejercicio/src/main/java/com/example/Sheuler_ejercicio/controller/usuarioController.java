@@ -78,6 +78,10 @@ public ResponseEntity<Object> save(@RequestBody usuario usuario) {
             return new ResponseEntity<>("El numero de documento es obligatorio", HttpStatus.BAD_REQUEST);
         }
         
+if (usuario.getNombre_completo().equals("")) {
+            
+            return new ResponseEntity<>("El nombre completo es obligatorio", HttpStatus.BAD_REQUEST);
+        }
         
         if ( usuario.getFecha_nacimiento().equals("")) {
             
@@ -114,7 +118,7 @@ public ResponseEntity<Object> save(@RequestBody usuario usuario) {
         
         usuario.setContrasena(codigoAleatorio());
 		usuarioService.save(usuario);
-		emailService.enviarNotificacionCuenta(usuario.getCorreo_electronico(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
+		emailService.enviarNotificacionCuenta(usuario.getCorreo_electronico(),usuario.getNombre_completo(),usuario.getTipo_documento(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
 		return new ResponseEntity<>(usuario,HttpStatus.OK);
 	}
 	
@@ -130,6 +134,12 @@ public ResponseEntity<Object> save(@RequestBody usuario usuario) {
 		var ListaUsuario = usuarioService.filtroUsuario(filtro);
 		return new ResponseEntity<>(ListaUsuario, HttpStatus.OK);
 	}
+	
+	@GetMapping("/mayoriaedad")
+    public ResponseEntity<Object> findEdad() {
+        var listaUsuario = usuarioService.cambiarTipoDocumento();
+        return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
+    }
 	//@PathVariable recibe una variable por el enlace
 	
 	@GetMapping("/{id_usuario}")
@@ -162,6 +172,7 @@ public ResponseEntity<Object> save(@RequestBody usuario usuario) {
 
 					usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
 					usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
+					usuario.setNombre_completo(usuarioUpdate.getNombre_completo());
 					usuario.setFecha_nacimiento(usuarioUpdate.getFecha_nacimiento());
 					usuario.setContrasena(usuarioUpdate.getContrasena());
 					usuario.setFecha_ultima_actualizacion_contrasena(usuarioUpdate.getFecha_ultima_actualizacion_contrasena());

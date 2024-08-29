@@ -21,6 +21,9 @@ public class usuario {
 	@Column(name="numero_documento",nullable=false,length=36)
 	private String numero_documento;
 	
+	@Column(name="nombre_completo",nullable=false,length=100)
+	private String nombre_completo;
+	
 	@Column(name="fecha_nacimiento",nullable=false,length=36)
 	private Date fecha_nacimiento;
 	
@@ -46,13 +49,14 @@ public class usuario {
 		super();
 	}
 
-	public usuario(String id_usuario, String tipo_documento, String numero_documento, Date fecha_nacimiento,
-			String contrasena, Date fecha_ultima_actualizacion_contrasena, Date fecha_ultimo_inicio_sesion,
-			String estado, String correo_electronico, String notificacion) {
+	public usuario(String id_usuario, String tipo_documento, String numero_documento, String nombre_completo,
+			Date fecha_nacimiento, String contrasena, Date fecha_ultima_actualizacion_contrasena,
+			Date fecha_ultimo_inicio_sesion, String estado, String correo_electronico, String notificacion) {
 		super();
 		this.id_usuario = id_usuario;
 		this.tipo_documento = tipo_documento;
 		this.numero_documento = numero_documento;
+		this.nombre_completo = nombre_completo;
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.contrasena = contrasena;
 		this.fecha_ultima_actualizacion_contrasena = fecha_ultima_actualizacion_contrasena;
@@ -84,6 +88,14 @@ public class usuario {
 
 	public void setNumero_documento(String numero_documento) {
 		this.numero_documento = numero_documento;
+	}
+
+	public String getNombre_completo() {
+		return nombre_completo;
+	}
+
+	public void setNombre_completo(String nombre_completo) {
+		this.nombre_completo = nombre_completo;
 	}
 
 	public Date getFecha_nacimiento() {
@@ -146,6 +158,5 @@ public class usuario {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 	
 }

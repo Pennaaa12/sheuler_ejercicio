@@ -11,5 +11,6 @@ public interface IUsuarioService {
 	public List<usuario> filtroUsuario(String filtro);
 	public Optional<usuario>findOne (String id);
 	public int delete (String id);
+	public List<usuario> cambiarTipoDocumento();
 	public List<usuario>filtroIngresoUsuario(String numero_documento);
 }

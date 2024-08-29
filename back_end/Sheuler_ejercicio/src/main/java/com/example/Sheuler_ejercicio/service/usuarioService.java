@@ -48,6 +48,13 @@ public class usuarioService implements IUsuarioService{
 		data.deleteById(id_usuario);
 		return 1;
 	}
+	
+	 @Override
+	    public List<usuario> cambiarTipoDocumento() {
+	        List<usuario> listaUsuario = data.cambiarTipoDocumento();
+	        return listaUsuario;
+	    }
+	    
 	@Override
 
 	public List<usuario> filtroIngresoUsuario(String numero_documento) {

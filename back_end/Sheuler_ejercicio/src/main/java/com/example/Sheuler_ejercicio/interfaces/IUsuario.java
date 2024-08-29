@@ -25,4 +25,7 @@ public interface IUsuario extends CrudRepository <usuario,String> {
 	
 	@Query("SELECT u FROM usuario u WHERE u.numero_documento = ?1 AND u.estado='H'")
 	List<usuario> filtroIngresoUsuario(String numero_documento );
+	
+	@Query ("SELECT u FROM usuario u WHERE TIMESTAMPDIFF(YEAR, u.fecha_nacimiento, NOW())>=18 AND u.tipo_documento='TI'")
+    List<usuario> cambiarTipoDocumento();
 }
