@@ -1,6 +1,7 @@
 package com.example.Sheuler_ejercicio.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +50,32 @@ public class usuarioService implements IUsuarioService{
 		return 1;
 	}
 	
-	 @Override
-	    public List<usuario> cambiarTipoDocumento() {
-	        List<usuario> listaUsuario = data.cambiarTipoDocumento();
-	        return listaUsuario;
-	    }
-	    
+    
 	@Override
 
 	public List<usuario> filtroIngresoUsuario(String numero_documento) {
 		List<usuario> listaUsuario=data.filtroIngresoUsuario(numero_documento);
 		return listaUsuario;
 	}
+	
+	 @Override
+	    public List<usuario> cambiarTipoDocumento() {
+	        List<usuario> listaUsuario = data.cambiarTipoDocumento();
+	        return listaUsuario;
+	    }
+	
+	
+	@Override
+    public List<usuario> actualizarContraseña() {
+        List<usuario> listaUsuario = data.actualizarContraseña();
+        return listaUsuario;
+    }
+
+    
+    @Override
+    public List<usuario> iniciosesionNotificar() {
+        List<usuario> listaUsuario = data.iniciosesionNotificar();
+        return listaUsuario;
+    }
 	
 }

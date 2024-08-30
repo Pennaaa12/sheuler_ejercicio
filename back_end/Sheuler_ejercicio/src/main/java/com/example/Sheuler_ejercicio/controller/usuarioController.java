@@ -118,7 +118,7 @@ if (usuario.getNombre_completo().equals("")) {
         
         usuario.setContrasena(codigoAleatorio());
 		usuarioService.save(usuario);
-		emailService.enviarNotificacionCuenta(usuario.getCorreo_electronico(),usuario.getNombre_completo(),usuario.getTipo_documento(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
+		emailService.enviarNotificacionRegistroCuenta(usuario.getCorreo_electronico(),usuario.getNombre_completo(),usuario.getTipo_documento(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
 		return new ResponseEntity<>(usuario,HttpStatus.OK);
 	}
 	
@@ -138,6 +138,12 @@ if (usuario.getNombre_completo().equals("")) {
 	@GetMapping("/mayoriaedad")
     public ResponseEntity<Object> findEdad() {
         var listaUsuario = usuarioService.cambiarTipoDocumento();
+        return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
+    }
+	
+	@GetMapping("/actualizarContraseña")
+    public ResponseEntity<Object> findActualizarContraseña() {
+        var listaUsuario = usuarioService.actualizarContraseña();
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
     }
 	//@PathVariable recibe una variable por el enlace
@@ -185,7 +191,7 @@ if (usuario.getNombre_completo().equals("")) {
 					return new ResponseEntity<>("Guardado", HttpStatus.OK);
 
 				} else {
-					return new ResponseEntity<>("Error libro no encontrado", HttpStatus.BAD_REQUEST);
+					return new ResponseEntity<>("Error, usuario no encontrado", HttpStatus.BAD_REQUEST);
 				}
 			}
 			

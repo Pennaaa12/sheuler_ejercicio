@@ -18,8 +18,17 @@ public class task {
     @Autowired
     private emailService email;
 
-    @Scheduled(fixedRate =1000)
-    public void sendNotificationcron() {
+    @Scheduled(cron ="0 45 15 * * *")
+    public void enviarNotificacionRegistroCuenta() {
+        var listaUsuario=data.cambiarTipoDocumento();
+        for (usuario usuario : listaUsuario) {
+            System.out.println("Usuario registrado: "+ 
+            usuario.getNombre_completo());
+            email.cambiarTipoDocumento(usuario.getCorreo_electronico(),usuario.getNombre_completo(),usuario.getTipo_documento(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
+        }
+    }
+    @Scheduled(cron ="0 45 15 * * *")
+    public void sendNotificationCambiarTipoDocumento() {
         var listaUsuario=data.cambiarTipoDocumento();
         for (usuario usuario : listaUsuario) {
             System.out.println("Usuario que requiere actualizar documento: "+ 
@@ -27,4 +36,26 @@ public class task {
             email.cambiarTipoDocumento(usuario.getCorreo_electronico(),usuario.getNombre_completo(),usuario.getTipo_documento(),usuario.getNumero_documento(),usuario.getCorreo_electronico(),usuario.getContrasena());
         }
     }
+    
+    @Scheduled(cron ="0 45 15 * * *") //Para realizar las pruebas rápidas: fixedRate =1000
+    public void sendNotificationActualizarContra() {
+        var listaUsuario=data.actualizarContraseña();
+        for (usuario usuario : listaUsuario) {
+            System.out.println("Usuario que requiere actualizar contraseña: "+ 
+            usuario.getNombre_completo());
+            email.actualizarContraseña(usuario.getCorreo_electronico());
+        }
+    }
+    
+    @Scheduled(cron ="0 45 15 * * *")
+    public void sendIniciarSesion() {
+        var listaUsuario=data.iniciosesionNotificar();
+        for (usuario usuario : listaUsuario) {
+            System.out.println("Usuario que debe iniciar sesión: "+ 
+            usuario.getNombre_completo());
+            email.iniciosesionNotificar(usuario.getCorreo_electronico());
+        }
+    }
+    
+    
 }
